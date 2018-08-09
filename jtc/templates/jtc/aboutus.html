@@ -1,0 +1,133 @@
+{% extends 'jtc/base.html' %}
+{% load staticfiles %}
+{% block unload %}
+{% endblock %}
+{% block loadcss %}
+	<link rel="stylesheet" href="{% static 'jtc/css/aboutus.css' %}"> <!-- CSS reset -->
+	<link rel="stylesheet" href="{% static 'jtc/css/aboutus1.css' %}"> <!-- Resource style -->
+{% endblock %}
+{% block loadjs %}
+	<script src="{% static 'jtc/js/modernizr.js' %}"></script> <!-- Modernizr -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="{% static 'jtc/js/aboutus.js' %}"></script> <!-- Resource jQuery -->
+{% endblock %}
+{% block middle %}
+	<div style="background-image:url(/static/jtc/img/about/bg.jpg);" class='gone'>
+	<h1 style="width:1320px; height:30px;">We are&nbsp;</h1>
+	<h1 style="font-size:48px">MOVIE BUFF'S</h1>
+	</div>
+	
+<h1 style="font-size:48px; margin-left: 500px;"> Our Journey </h1>
+	<section id="cd-timeline" class="cd-container">
+		<div class="cd-timeline-block">
+			<div class="cd-timeline-img cd-picture">
+				<img src="/static/jtc/img/about/saif.png" alt="Picture">
+			</div> <!-- cd-timeline-img -->
+				
+			<div class="cd-timeline-content">
+				<h2>The Three Musketeers</h2>
+				<p>What happens when 3 long-time friends go holidaying together in South Africa? The seed of a BigTree is planted. A company is planned, from roots to fruits. Soon after the Eureka moment, C.E.O. Akshay Bisht quits his job at Facebook, Co-Founder Sumit Bhakt takes over Technology, and Co-Founder Kushagra Bhatt takes over Finance.</p>
+				<span class="cd-date">1999</span>
+			</div> <!-- cd-timeline-content -->
+		</div> <!-- cd-timeline-block -->
+
+		<div class="cd-timeline-block">
+			<div class="cd-timeline-img cd-movie">
+				<img src="/static/jtc/img/about/vista.png" alt="Movie">
+			</div> <!-- cd-timeline-img -->
+
+			<div class="cd-timeline-content">
+				<h2>Gaining Ground With Cinemas</h2>
+				<p>With the cinema industry on a high and multiplexes and large cinema chains starting to entertain Indian audiences around the country; Bigtree takes over the rights to retail and service New Zealand based ticketing software, Vista in India.</p>
+				<span class="cd-date">2000-01</span>
+			</div> <!-- cd-timeline-content -->
+		</div> <!-- cd-timeline-block -->
+
+		<div class="cd-timeline-block">
+			<div class="cd-timeline-img cd-location">
+				<img src="/static/jtc/img/about/network18.png" alt="Picture">
+			</div> <!-- cd-timeline-img -->
+
+			<div class="cd-timeline-content">
+				<h2>Fighting the rough seas</h2>
+				<p>In the midst of the dot com bust that happened in 2002, the company offered technology solutions from the Customer Relationship Management point of view to fight the storm. This business flourished under the leadership of our 3 musketeers.</p>
+				
+				<span class="cd-date">2002-2007</span>
+			</div> <!-- cd-timeline-content -->
+		</div> <!-- cd-timeline-block -->
+
+		<div class="cd-timeline-block">
+			<div class="cd-timeline-img cd-picture">
+				<img src="/static/jtc/img/about/records.png" alt="Location">
+			</div> <!-- cd-timeline-img -->
+
+			<div class="cd-timeline-content">
+				<h2>The Big Bucks</h2>
+				<p>Network 18 invested in March 2007. In August, the same year an internal contest was held to coin a name for the new company. A developer intern came up with the name BookMyShow.com and the rest as they say is history.</p>
+				
+				<span class="cd-date">2007-2010</span>
+			</div> <!-- cd-timeline-content -->
+		</div> <!-- cd-timeline-block -->
+
+		<div class="cd-timeline-block">
+			<div class="cd-timeline-img cd-movie">
+				<img src="/static/jtc/img/about/network18.png" alt="Location">
+			</div> <!-- cd-timeline-img -->
+
+			<div class="cd-timeline-content">
+				<h2>Launch Of Cinestar</h2>
+				<p>Bigtree Entertainment Pvt. Ltd launches India's first ticketing aggregator - Cinestar- in August 2007, now one of the biggest ticketing portals in the country.</p>
+				
+				<span class="cd-date">2010-2012</span>
+			</div> <!-- cd-timeline-content -->
+		</div> <!-- cd-timeline-block -->
+
+		<div class="cd-timeline-block">
+			<div class="cd-timeline-img cd-location">
+				<img src="/static/jtc/img/about/f1.png" alt="Movie">
+			</div> <!-- cd-timeline-img -->
+
+			<div class="cd-timeline-content">
+				<h2>Need for Speed</h2>
+				<p>Cinestar becomes the exclusive ticketing partner for Formula 1, the Indian Grand Prix. After the grand success of 2011, we are all geared up for 2012's extravaganza.</p>
+				<span class="cd-date">2012-2014</span>
+			</div> <!-- cd-timeline-content -->
+		</div>		<!-- cd-timeline-block -->
+		
+		<div class="cd-timeline-block">
+			<div class="cd-timeline-img cd-picture">
+				<img src="/static/jtc/img/about/ipl.png" alt="Movie">
+			</div> <!-- cd-timeline-img -->
+
+			<div class="cd-timeline-content">
+				<h2>Yeh IPL Hai Boss</h2>
+				<p>Cinestar becomes the official ticketing partner for Mumbai Indians, Kings XI Punjab and Delhi Daredevils. Today we have Pune Warriors and Rajasthan Royals too on board this high drama entertainment circus called the IPL.</p>
+				<span class="cd-date">2014</span>
+			</div> <!-- cd-timeline-content -->
+		</div>
+		
+		<div class="cd-timeline-block">
+			<div class="cd-timeline-img cd-movie">
+				<img src="/static/jtc/img/about/record.png" alt="Movie">
+			</div> <!-- cd-timeline-img -->
+
+			<div class="cd-timeline-content">
+				<h2>Record High!</h2>
+				<p>During the opening weekend of mega blockbuster Dangal, BookMyShow creates new records; sells over 3 million movie tickets in a single weekend and for shows on Saturday & Sunday, BookMyShow sells over 1 Million tickets a day!</p>
+				<span class="cd-date">2015</span>
+			</div> <!-- cd-timeline-content -->
+		</div>
+		
+		<div class="cd-timeline-block">
+			<div class="cd-timeline-img cd-location">
+				<img src="/static/jtc/img/about/accel.png" alt="Movie">
+			</div> <!-- cd-timeline-img -->
+
+			<div class="cd-timeline-content">
+				<h2>Money Matters</h2>
+				<p>SAIF Partners invests USD 25 Million i.e. Rs. 150 crore valuing BookMyShow at Rs. 1000 crores.</p>
+				<span class="cd-date">2017</span>
+			</div> <!-- cd-timeline-content -->
+		</div>
+	</section> <!-- cd-timeline -->
+	{% endblock %}

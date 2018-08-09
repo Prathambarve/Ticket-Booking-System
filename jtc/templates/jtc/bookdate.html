@@ -1,0 +1,5 @@
+<center><h2>Select date</h2></center>
+{% for date in dates %}
+<input type="radio" name="date" id="d" value="{{ date.date|date:'Y-m-d' }}" {% if forloop.first %}checked{% endif %}>{{ date.date|date:'Y-m-d' }}<br>
+{% endfor %}
+

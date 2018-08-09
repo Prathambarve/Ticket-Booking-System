@@ -1,0 +1,28 @@
+pip install django-widget-tweaks
+
+pip install django-captcha ## maybe recaptcha
+
+for taking mysqldump
+
+mysqldump database_name > database_name.sql
+
+for taking backup up more than one databases
+
+mysqldump --databases database_one database_two > two_databases.sql
+
+for taking backup of all databases in server
+
+mysqldump --all-databases > all_databases.sql
+
+
+
+##############    T O   R E S T O R E    B A C K U P    ############
+
+
+mysql -u root -p < file_name.sql
+
+mysql --one-database database_name < file_name.sql   ## File containing more than one DB and we need only one
+
+
+
+

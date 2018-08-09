@@ -1,0 +1,196 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+	{% block edithtml %}
+	{% endblock %}
+	<head>
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Cinestar | Ticket Booking</title>
+
+
+		{% block unload %}
+		<!-- Bootstrap -->
+		<link href="{% static 'jtc/css/bootstrap.min.css' %}" rel="stylesheet">
+
+		<!-- Animate.css -->
+		<link href="{% static 'jtc/css/animate.min.css' %}" rel="stylesheet">
+		<!-- Owl Carousel -->
+		<link href="{% static 'jtc/css/owl.carousel.css' %}" rel="stylesheet">
+		<link href="{% static 'jtc/css/owl.theme.default.css' %}" rel="stylesheet">
+		<!-- YTPlayer -->
+		<link href="{% static 'jtc/css/jquery.mb.YTPlayer.min.css' %}" rel="stylesheet">
+		<!-- Nivo Lightbox -->
+		<link href="{% static 'jtc/css/nivo-lightbox.css' %}" rel="stylesheet">
+		<link href="{% static 'jtc/css/default.css' %}" rel="stylesheet">
+		<!-- Slider -->
+		<link href="{% static 'jtc/css/slider.css' %}" rel="stylesheet">
+		<link rel="stylesheet" href="{% static 'jtc/css/dark-orange.css' %} ">
+		{% endblock %}
+		<link rel="stylesheet" href="{% static 'jtc/css/base.min.css' %} ">		
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<link rel="stylesheet" type="text/css" href="{% static 'jtc/css/loginoption.css' %}" />
+        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css' />
+		{% block loadcss %}
+		{% endblock %}
+	</head>
+	<body>
+		<div id="loadingContainer"></div>
+		{% block slideshow %}
+        {% endblock %}
+
+		
+		<div class="page-wrapper">
+			<div class="inner">
+				<a href="" class="menu-open">
+					<span class="line top-line"></span>
+					<span class="line middle-line"></span>
+					<span class="line bottom-line"></span>
+					<span class="line top-line left"></span>
+					<span class="line middle-line left"></span>
+					<span class="line bottom-line left"></span>
+				</a>
+				<div class="menu" style="background-image: url({% static 'jtc/img/menu_bg.png' %});{% block setting %}{% endblock %}">
+					<div class="content">
+						<header class="menu-header">
+							<h3><img src="{% static 'jtc/img/logo3.png' %}" alt="Cinestar" class="img-responsive center-block"><small style="font-size:10px;">Where People <span>Meet Entertainment</span></small></h3>
+							{% if request.session.username %}
+							<p>
+							<div class="dropdown">
+						<button class="btn btn-primary dropdown-toggle button" type="button" data-toggle="dropdown" >User
+							 <span class="caret"></span></button>
+								<ul class="dropdown-menu">
+									<li><a href="#">Profile</a></li>
+									<li><a href="#">Settings</a></li>
+									<li><a href="#">Logout</a></li>
+								 </ul>
+						</div></p>
+							{% endif %}
+							<a href="" class="menu-close" {% if request.session.username %}style=" margin-top: 0; "{% endif %}><span></span><span></span><span></span><span></span></a>
+						</header>
+						
+						<nav class="main-nav">
+							<ul class="list-unstyled">
+								<li class="active"><a href="{% url 'home' %}" class="has-submenu" data-submenu="#home-submenu"><span>Home</span></a></li>
+								<li><a href="{% url 'aboutus' %}"><span>About Us</span></a></li>
+								<li><a href="{% url 'release' %}"><span>Release Dates</span></a></li>
+								<li><a href="{% url 'trailer' %}" class="has-submenu" data-submenu="#trailer-submenu"><span>Trailers</span></a></li>
+								<li><a href="{% url 'cast' %}"><span>Cast</span></a></li>
+								<li><a href="{% url 'gallery' %}"><span>Gallery</span></a></li>
+								<li><a href="contact.html"><span>Contact Us</span></a></li>
+								<li><a href="coming-soon.html"><span>Coming Soon</span></a></li>
+								<li><a href="{% url 'error' %}"><span>404 Page</span></a></li>
+							</ul>
+						</nav>
+						<div class="bottom-info">
+							<p><a href="{%url 'gallery' %}" class="button">Get Tickets</a></p>							
+							<nav class="bottom-info-nav">
+								<ul class="list-unstyled">
+									<li><a href="{% url 'terms' %}" class="credits-open">Legal</a></li>
+									<li><a href="#" class="share-open">Share</a></li>
+									<li><a href="#" class="follow-open">Follow</a></li>
+								</ul>
+								<div class="share">
+									<a href=""><i class="fa fa-facebook"></i></a>
+									<a href=""><i class="fa fa-twitter"></i></a>
+									<a href=""><i class="fa fa-google-plus"></i></a>
+								</div>
+								<div class="follow">
+									<a href=""><i class="fa fa-facebook"></i></a>
+									<a href=""><i class="fa fa-twitter"></i></a>
+									<a href=""><i class="fa fa-google-plus"></i></a>
+								</div>
+							</nav>
+						</div> <!-- end .bottom-info -->
+					</div> <!-- end .content -->
+				</div> <!-- end .menu -->
+				<div id="trailer-submenu" class="submenu">
+					<a href="" class="submenu-close"><span></span><span></span><span></span><span></span></a>
+					{% for mov in menu %}
+					<div class="item">
+						<a href="{% url 'trailer_of'  of=mov.title %}">
+							<img src="{{ mov.menu_poster }}" alt="{{ mov.title }}">
+							<div class="play"><i class="fa fa-play-circle-o"></i></div>
+						</a>
+					</div>
+					{% endfor %}
+					
+					
+					
+				</div> <!-- end .submenu -->
+		
+				{% block middle %}
+                
+				{% endblock %}
+			</div> <!-- end .inner -->
+		</div> <!-- end .page-wrapper -->
+
+
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<!-- jQuery -->
+		<script src="{% static 'jtc/js/jquery-1.11.2.min.js' %}"></script>
+		<!-- Bootstrap -->
+		<script src="{% static 'jtc/js/bootstrap.min.js' %}"></script>
+		<!-- Isotope -->
+		{% block unloadjs %}
+		<script src="{% static 'jtc/js/isotope.pkgd.min.js' %}"></script>
+		
+		<script src="{% static 'jtc/js/imagesloaded.pkgd.min.js' %}"></script>
+		<!-- Owl Carousel -->
+		<script src="{% static 'jtc/js/owl.carousel.min.js' %}"></script>
+		<!-- YTPlayer -->
+		<script src="{% static 'jtc/js/jquery.mb.YTPlayer.min.js' %}"></script>
+		<!-- Vide -->
+		<script src="{% static 'jtc/js/jquery.vide.min.js' %}"></script>
+		<!-- Nivo Lightbox -->
+		<script src="{% static 'jtc/js/nivo-lightbox.min.js' %}"></script>
+		<!-- Countdown -->
+		<script src="{% static 'jtc/js/countdown.js' %}"></script>
+		{% endblock %}
+		<!-- Nice Scroll -->
+		<script src="{% static 'jtc/js/jquery.nicescroll.min.js' %}"></script>
+		<!-- Scripts.js -->
+		<script src="{% static 'jtc/js/scripts.js' %}"></script>
+		<!-- pace -->
+		<script src="{% static 'jtc/js/pace.min.js' %}"></script>
+
+<script type="text/javascript">
+
+			function DropDown(el) {
+				this.dd = el;
+				this.initEvents();
+			}
+			DropDown.prototype = {
+				initEvents : function() {
+					var obj = this;
+
+					obj.dd.on('click', function(event){
+						$(this).toggleClass('active');
+						event.stopPropagation();
+					});	
+				}
+			}
+
+			$(function() {
+
+				var dd = new DropDown( $('#dd') );
+
+				$(document).click(function() {
+					// all dropdowns
+					$('.wrapper-dropdown-5').removeClass('active');
+				});
+
+			});
+
+		</script>
+		{% block loadjs %}
+		{% endblock %}
+
+	</body>
+</html>
+

@@ -1,0 +1,68 @@
+{% load staticfiles %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html>
+<head>
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	<link rel="stylesheet" href="{% static 'jtc/css/login.css' %}">
+  <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+  <link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css'>
+
+
+</head>
+
+<body>
+<div class="animated rotateIn">
+  <div class='wrapper'>
+  <div class='container'>
+    <div class='row'>
+      <div class='col-xs-6 col-sm-6 col-lg-4 col-xs-offset-4 col-sm-offset-4 col-lg-offset-4'>
+        <div class='header text-center'>
+          <h1 style="height:50px; width:290px;">
+            Log In
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-xs-6 col-sm-6 col-lg-4 col-xs-offset-4 col-sm-offset-4 col-lg-offset-4'>
+        <img src="{% static 'jtc/img/background-shape.png' %}" class='img--abstract'>
+        <div class='form--container'>
+          <div class='row'>
+            <div class='col-xs-12'>
+							{% if a %}
+              <p style="color: red; font-size: 14px;">{{ a }}</p>
+              {% endif %}
+              <form action="{% url 'login' %}" method="post">{% csrf_token %}
+                <label>
+								{% render_field form.email autocomplete="off" %}
+                  <span>E-mail</span>
+                </label>
+                <label>
+								{% render_field form.password autocomplete="off" type="password" %}
+                  <span>Password</span>
+                </label>
+								 <div class='row'>
+									<div class='col-xs-12'>
+										<input type="submit" class="btn--main" value="Log In">
+								 </div>
+								</div>
+              </form>
+            </div>
+          </div>
+		  <br><br>
+        </div>
+        <div class='footer--links text-center'>
+          <p>
+            Don't have an account?
+            <a href="{% url 'register' %}">Sign Up</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+</body>
+</html>

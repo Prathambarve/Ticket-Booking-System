@@ -1,0 +1,48 @@
+{% extends 'jtc/base.html' %}
+{% load staticfiles %}
+{% block unload %}
+{% endblock %}
+{% block loadcss %}
+<link rel="stylesheet" type="text/css" href="{% static 'jtc/css/release.css' %}"/>
+{% endblock %}
+{% block setting %}
+overflow: hidden;
+{% endblock %}
+{% block edithtml %}
+
+{% endblock %}
+{% block middle %}
+<div id="wrapper">
+	<div id="content">
+		<ul id="movieposters">
+			{% for mov in movie %}
+			<li>
+				<img src="{{ mov.poster }}" alt="{{ mov.title }}" />
+				<div class="movieinfo">
+					<h3>{{ mov.title }}</h3>
+					<p>Genre:	{% for g in mov.genre.all %}{% if forloop.last %}{{ g.genre_name }}{% else %}{{ g.genre_name }}{% endif %}{% endfor %}<br>
+					   Rating: {{ mov.rating }}/10
+					</p>
+					<a href="" title="{{ mov.title }}">More info</a>
+				</div>
+			</li>
+			{% endfor %}{% for mov in movie %}
+			<li>
+				<img src="{{ mov.poster }}" alt="{{ mov.title }}" />
+				<div class="movieinfo">
+					<h3>{{ mov.title }}</h3>
+					<p>Genre:	{% for g in mov.genre.all %}{% if forloop.last %}{{ g.genre_name }}{% else %}{{ g.genre_name }}{% endif %}{% endfor %}<br>
+					   Rating: {{ mov.rating }}/10
+					</p>
+					<a href="" title="{{ mov.title }}">More info</a>
+				</div>
+			</li>
+			{% endfor %}
+	</ul>
+	</div>
+</div>
+{% endblock %}
+{% block unloadjs %}
+{% endblock %}
+</body>
+</html>

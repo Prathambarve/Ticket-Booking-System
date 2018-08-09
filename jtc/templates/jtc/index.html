@@ -1,0 +1,83 @@
+{% extends 'jtc/base.html' %}
+{% load staticfiles %}
+{% block slideshow %}
+<ul class="cb-slideshow">
+			{% for mov in back %}
+			<li><span style="background-image: url({{ mov.banner }});">{{ mov.title }}</span></li>
+			{% endfor %}
+		</ul>
+{% endblock %}
+{% block middle %}
+
+<div class="menu-overlay"></div>
+				<div class="page-middle">
+					{% if request.session.username %}
+					<div class="dropdown"> 
+					<button type="button" class="button dropdown-toggle pull-right" data-toggle="dropdown" style="margin-top: 10px;">
+					{{ request.session.username }}<span class="caret"></span></button>
+					  <ul class="dropdown-menu pull-right" style="margin-top: 70px;">
+						<li><a href="#">Profile</a></li>
+						  <li class="divider"></li>
+						<li class="dropdown-header">Booking History</li>
+						  <li><a href="#">Change Password</a></li>
+						<li><a href="#">Log Out</a></li>
+					  </ul>
+					 </div>
+					{% endif %}	
+					<div class="cast">
+						<div class="cast-member-wrapper"><div class="cast-member">Book<span>Movies</span></div></div>
+						<div class="cast-member-wrapper"><div class="cast-member">Book<span>Shows</span></div></div>
+						<div class="cast-member-wrapper"><div class="cast-member">Watch<span>IPL</span></div></div>
+						<div class="cast-member-wrapper"><div class="cast-member">Book<span>Sunburn</span></div></div>
+						<div class="cast-member-wrapper"><div class="cast-member">Book<span>Concerts</span></div></div>
+						<div class="cast-member-wrapper"><div class="cast-member">Book<span>Sports</span></div></div>
+					</div> <!-- end .cast -->
+					<h1><img src="{% static 'jtc/img/logo.png' %}" alt="Cinestar" class="img-responsive center-block"><small>Where People Meet Entertainment</small></h1>
+					<div class="button-row"><a href="https://www.youtube.com/watch?v=YH3c1QZzRK4" class="button video-popup"><i class="bg-icon pe-7s-play"></i>Watch Trailer</a><a href="about.html" class="button white">More Details</a></div>
+					<div class="awards">
+						<img src="{% static 'jtc/img/award1.png' %}" alt="award" class="img-responsive">
+						<img src="{% static 'jtc/img/award2.png' %}" alt="award" class="img-responsive">
+						<img src="{% static 'jtc/img/award3.png' %}" alt="award" class="img-responsive">
+					</div> <!-- end .awards -->
+					<div class="quotes">
+						<div class="quote">“AN EPIC MASTERPIECE! THE BEST MOVIE SO FAR THIS YEAR.”<span>Sumit Bhakt</span></div>
+						<div class="quote">"★★★★"<span>Sumit Bhakt</span></div>
+						<div class="quote">"Best VFX & 3D movie ever seen"<span>Kushagra Bhatt</span></div>
+						<div class="quote">"★★★★"<span>Kushagra Bhatt</span></div>
+					</div> <!-- end .quotes -->
+				</div> <!-- end .page-middle -->
+				<div class="bottom-info align">
+					{% if not request.session.username %}
+					<p><a href="{% url 'login' %}" class="button">Log In</a></p>
+					{% endif %}
+					<nav class="bottom-info-nav">
+						<ul class="list-unstyled">
+							<li><a href="" class="audioControl"><i class="pe-7s-volume"></i></a></li>
+							<li><a href="" class="credits-open">Legal</a></li>
+							<li><a href="" class="share-open">Share</a></li>
+							<li><a href="" class="follow-open">Follow</a></li>
+						</ul>
+						{% for i in a %}
+						<div class="{% if forloop.first %}share{% else %}follow{% endif %}">
+							<a href=""><i class="fa fa-facebook"></i></a>
+							<a href=""><i class="fa fa-twitter"></i></a>
+							<a href=""><i class="fa fa-google-plus"></i></a>
+						</div>
+						{% endfor %}
+					</nav>
+				</div>
+				<div class="blog-post-slider">
+					<div class="item clearfix">
+						<a href="" target="_blank">
+							<div class="inner clearfix">
+								<img src="{% static 'jtc/img/blog-post-slider.png' %}" alt="">
+								<h5>Find Your Local Theater</h5>
+							</div>
+							<div class="overlay clearfix">
+								<i class="fa fa-arrow-right"></i>
+								<h5>Find Your Local Theater</h5>
+							</div>
+						</a>
+					</div> <!-- end .item -->
+				</div> <!-- end .blog-post-slider -->
+            {% endblock %}

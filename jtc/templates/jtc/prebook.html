@@ -1,0 +1,165 @@
+{% extends 'jtc/base.html' %}
+{% load staticfiles %}
+{% block unload %}{% endblock %}
+{% block loadcss %}
+		<!-- Loading third party fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
+		<!-- Loading main css file -->
+		<link href="{% static 'jtc/css/bootstrap.min.css' %}" rel="stylesheet">
+		<link rel="stylesheet" href="{% static 'jtc/css/prebook.css' %}">
+		
+		<style>
+			body{
+				background-color: #2a2a2a;
+				}
+		</style>
+{% endblock %}
+{% block loadjs %}
+		<!--[if lt IE 9]>
+		<script src="{% static 'jtc/js/ie-support/html5.js' %}"></script>
+		<script src="{% static 'jtc/js/ie-support/respond.js' %}"></script>
+		<![endif]-->
+		<!--ajax script-->
+		<script>
+		//for getting cookie	
+		function getCookie(name) {
+		var cookieValue = null;
+		if (document.cookie && document.cookie !== '') {
+		    var cookies = document.cookie.split(';');
+		    for (var i = 0; i < cookies.length; i++) {
+		        var cookie = jQuery.trim(cookies[i]);
+		        // Does this cookie string begin with the name we want?
+		        if (cookie.substring(0, name.length + 1) == (name + '=')) {
+		            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		            break;
+		        }
+		    }
+		}
+		    return cookieValue;
+		}
+			//for date
+			$(document).ready(function(){
+				$("#state").on('change', function(){
+					var a = $(this).find("option:selected").prop("title");
+					console.log(a);
+					var b = a.split('-')[0];
+					document.getElementById("multiplx").innerHTML="<input type='hidden' name='multiplex' value='"+a+"'>";
+					$.ajaxSetup({cache:'true'});
+					$.ajax({
+						url: "{% url 'bookdate' %}",
+						type: "post",
+						data: {
+							    'multiplex' : b,
+								'mov': $("#mymovie").text(),
+								'csrfmiddlewaretoken': getCookie('csrftoken')
+							},
+						success: function(data){
+							document.getElementById("date-input").innerHTML=data;
+							},
+						failure: function(){
+							alert("SERVER ERROR Conatct admin");
+						}
+						
+						});
+					});
+				});
+			//for time
+			$(document).on('click', '#d', function(){
+				$('#my_form input').on('change',function(){
+					console.log($('input[name="date"]:checked').val());  //sanity check
+					var a = $("#state").find("option:selected").prop("title");
+					var b = a.split('-')[0];
+					$.ajax({
+						url: "{% url 'booktime' %}",
+						type: 'post',
+						data: {
+								'multiplex' : b,
+								'mov': $("#mymovie").text(),
+								'csrfmiddlewaretoken': getCookie('csrftoken'),
+								'date': $('input[name="date"]:checked').val()
+							},
+						success: function(data){
+							document.getElementById("time-input").innerHTML=data;	
+						},
+						failure: function(){
+							alert("Contact admin server error");
+						}
+					});
+					});
+				});
+			
+			
+		</script>
+{% endblock %}
+
+{% block middle %}
+		<div id="site-content">
+			<main class="main-content">
+				<div class="container">
+					<div class="page">
+						<div class="content">
+							<div class="row">
+								<div class="col-md-6">
+									<figure class="movie-poster"><img src="{{ film.banner }}" alt="#" style=" height: 512px; width: 420px;" ></figure>
+								</div>
+								<div class="col-md-6">
+									<h2 id="mymovie" class="movie-title">{{ film.title }}</h2>
+									<div class="movie-summary">
+									<form id="my_form" action="{% url 'book' name=film.title %}" method="post" class="pure-form pure-form-stacked">{% csrf_token %}
+									<fieldset>
+									<legend>Book Tickets</legend>
+							<div>
+                <label for="state">Theatre:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <select id="state" title="multiplex" class="pure-input-1-2">
+					<option >select</option>
+                    {% for mul in film.multiplexes.all %}
+					<option id="op{{ forloop.counter }}" title="{{ mul.name }}-{{ mul.location }}">{{ mul.name }} {{ mul.location }}</option>
+					{% endfor %}
+                </select>
+				<div style="display: none;" id="multiplx"></div>
+            </div>
+			<br>
+			
+		 <div id="date-input">
+		 </div>
+		<br>
+		<div id="time-input">
+        </div>
+		<br/>
+        <input type="submit" class="button" value="Book Ticket">
+    </fieldset>
+</form>
+									</div>
+									<ul class="movie-meta">
+										<li><strong>Rating:</strong> 
+											<div class="star-rating" title="Rated 4.00 out of 5"><span style="width:80%"><strong class="rating">4.00</strong> out of 5</span></div>
+										</li>
+										<li><strong>Length:</strong> 98 min</li>
+										<li><strong>Premiere:</strong> 22 March 2013 (USA)</li>
+										<li><strong>Category:</strong> Animation/Adventure/Comedy</li>
+									</ul>
+
+									<ul class="starring">
+										<li><strong>Directors:</strong> Kirk de Mico (as Kirk DeMico). Chris Sanders</li>
+										<li><strong>Writers:</strong> Chris Sanders (screenplay), Kirk De Micco (screenplay)</li>
+										<li><strong>Stars:</strong> Nicolas Cage, Ryan Reynolds, Emma Stone</li>
+									</ul>
+								</div>
+							</div> <!-- .row -->
+							<div class="entry-content">
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac pharetra libero. Integer in suscipit diam, sit amet eleifend nunc. Curabitur egestas nunc nulla, in aliquet risus efficitur quis. Vivamus facilisis est libero, vitae iaculis nulla cursus in. Suspendisse potenti. In et fringilla ipsum, quis varius quam. Morbi eleifend venenatis diam finibus vehicula. Suspendisse eu blandit metus. Sed feugiat pellentesque turpis, in lacinia ipsum. Vivamus nec luctus orci.</p>
+								<p>Aenean vehicula eget risus sit amet posuere. Maecenas id risus maximus, malesuada leo eget, pellentesque arcu. Phasellus vitae leo rhoncus, consectetur mauris vitae, lacinia quam. Nunc turpis erat, accumsan eget justo quis, auctor ultricies magna. Mauris sodales, risus sit amet hendrerit tincidunt, erat ante facilisis sapien, sit amet maximus neque massa a felis. Nullam consectetur justo massa, vel commodo metus gravida in. Aliquam erat volutpat. Nullam a lorem sed lorem euismod gravida a eu velit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis ac ligula vel pharetra. Aenean vitae nulla sed dui volutpat euismod. Nam ex quam, consequat id rutrum sed, porttitor id lectus. Vestibulum venenatis consectetur justo ut sagittis. Duis dignissim tincidunt quam, nec pulvinar libero luctus nec. Morbi blandit nec lorem in ullamcorper.</p>
+								<p>Vestibulum et odio massa. Integer at odio ipsum. Proin vitae tristique nibh. Aenean semper ante sit amet ante ultricies tincidunt. Curabitur cursus, urna non ultricies posuere, dolor lacus cursus lorem, a dapibus nibh ex eget sem. Aliquam semper sagittis sapien a fermentum. Nullam sed iaculis lacus, et imperdiet risus. Praesent quis turpis ac nunc sodales tincidunt. Aliquam at leo odio. Sed a tempor nisl, et mattis felis. Nam mauris nunc, commodo ac orci ut, auctor viverra mauris.</p>
+								<p>Quisque nec justo vitae metus consectetur ultrices. Duis venenatis lorem massa, eu pulvinar quam faucibus sed. Nulla fringilla lorem sit amet sagittis mattis. Nunc in leo a odio mollis consectetur. Etiam ac nisl eget diam ullamcorper porta. Aliquam consectetur neque eget metus egestas sollicitudin. Curabitur ultrices urna et feugiat malesuada.</p>
+								<p>Nulla facilisi. Fusce sed dapibus leo, eu lobortis ante. Duis luctus mauris in ante semper, ut feugiat nisi condimentum. Nullam a odio et justo suscipit tempus. Vestibulum placerat dapibus quam, a egestas turpis efficitur id. Integer suscipit placerat placerat. Phasellus in lorem quis leo egestas accumsan. Nam et euismod ligula. Duis nec erat aliquam, sollicitudin diam non, ornare leo. Pellentesque augue leo, faucibus in nunc nec, tincidunt ullamcorper tortor. Phasellus aliquam condimentum elit. Nulla facilisi. Donec magna libero, bibendum eu faucibus et, mattis at felis. Integer turpis nibh, blandit nec elit vel, euismod laoreet quam. Donec vel ante nisi. Nunc luctus a tellus non.</p>
+							</div>
+						</div>
+					</div>
+				</div> <!-- .container -->
+			</main>
+		</div>
+		<!-- Default snippet for navigation -->
+		{% endblock %}
+	</body>
+
+</html>

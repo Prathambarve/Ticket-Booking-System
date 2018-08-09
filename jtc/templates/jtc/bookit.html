@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" class="no-js">
+	<head>
+		<link rel="stylesheet" type="text/css" href="{% static 'jtc/css/normalize.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'jtc/css/demo.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'jtc/css/component.css' %}" />
+		<script src="{% static 'jtc/js/modernizr-custom.js' %}"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<header class="header">
+			<h1 class="header__title" style="color: #ffac23;">Experience the theatre in 180&deg;</h1>
+			<p class="note note--screen">Please view on a larger screen</p>
+			<p class="note note--support">Sorry, but your browser doesn't support preserve-3d!</p>
+		</header>
+		<div class="container">
+			<div class="cube">
+				<div class="cube__side cube__side--front"></div>
+				<div class="cube__side cube__side--back">
+					<div class="screen">
+						<div class="video">
+							<iframe width="1280" height="720" src="https://www.youtube.com/embed/OiAmnKUaNmc?rel=0&amp;showinfo=0" frameborder="0"></iframe>
+							<button class="action action--play action--shown" aria-label="Play Video"></button>
+						</div>
+						<div class="intro intro--shown">
+							<div class="intro__side">
+								<h2 class="intro__title">
+									<span class="intro__up">{{ mov.Multiplex.all }}<!--<em>Kashipur</em>--></span>
+									<span class="intro__down">{{ mov.title }} <span class="intro__partial"><em>by</em> Christopher Nolan</span></span>
+								</h2>
+							</div>
+							<div class="intro__side">
+								<button class="action action--seats">Select your seats</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<form method="POST" action="" >{% csrf_token %}
+				<div class="cube__side cube__side--left"></div>
+				<div class="cube__side cube__side--right"></div>
+				<div class="cube__side cube__side--top"></div>
+				<div class="rows rows--large">
+					<div class="row">
+						{% for seat in movie.seats_set.all %}
+						<div data-seat="{{ seat.seat_no }}" class="row__seat {% if not seat.seat_avail %}row__seat--reserved{% endif %}"><input type="hidden" name="{{ seat.seat_no }}" value="{% if not seat.seat_avail %}1{% else %}0{% endif %}"></div>
+						{% endfor %}				
+					</div>
+				</div>
+				<!-- /rows -->
+			</div><!-- /cube -->
+		</div><!-- /container -->
+		<div class="plan">
+			<h3 class="plan__title">Seating Plan</h3>
+			<div class="rows rows--mini">
+				{% for row in a %}
+				<div class="row">
+					{% for seat in mov.seats_set.all %}
+					<div class="row__seat {% if seat.seat_avail %}tooltip{% else %}row__seat--reserved{% endif %}" data-tooltip="{{ seat.seat_no }}"></div>
+					{% endfor %}
+				</div>
+				{% endfor %}
+			</div>
+		</form>
+			<!-- /rows -->
+			<ul class="legend">
+				<li class="legend__item legend__item--free">Free</li>
+				<li class="legend__item legend__item--reserved">Reserved</li>
+				<li class="legend__item legend__item--selected">Selected</li>
+			</ul>
+			<button class="action action--buy">Buy tickets</button>
+			<div id="fn" hidden><input type="text" placeholder="In Rs." id="textbox" readonly></div>
+		</div><!-- /plan -->
+		<button class="action action--lookaround action--disabled" arial-label="Unlook View"></button>
+		<style>
+#textbox  { 
+    background: #f5f5f5; 
+    font-size: 0.8rem; 
+    -moz-border-radius: 3px; 
+    -webkit-border-radius: 3px; 
+    border-radius: 3px; 
+    border: none; 
+    padding: 13px 10px; 
+    width:230px; 
+    margin-bottom: 20px; 
+    box-shadow: inset 0px 2px 3px rgba( 0,0,0,0.1 ); 
+    clear: both; 
+} 
+#textbox:focus { 
+    background: #fff; 
+    box-shadow: 0px 0px 0px 3px #fff38e, inset 0px 2px 3px rgba( 0,0,0,0.2 ), 0px 5px 5px rgba( 0,0,0,0.15 ); 
+    outline: none;    
+} 
+</style>
+<script>
+$(document).on("click",function(e){
+if($(e.target).is(".row__seat")){
+$("#fn").show();
+}
+});
+</script>
+		<script src="{% static 'jtc/js/classie.js' %}"></script>
+		<script src="{% static 'jtc/js/main.js' %}"></script>
+	</body>
+</html>

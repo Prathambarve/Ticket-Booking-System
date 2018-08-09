@@ -1,0 +1,12 @@
+{% load widget_tweaks %}
+{% load staticfiles %}
+<div class="login-form">
+<form action="{% url 'test' %}" method="post">
+    {% csrf_token %}
+    {% for seat in movie.seats_set.all %}
+    {% render_field form.A.1  %}
+    {% endfor %}
+    <input type="submit" value="Submit" />
+    {{ a }}
+</form>
+</div>

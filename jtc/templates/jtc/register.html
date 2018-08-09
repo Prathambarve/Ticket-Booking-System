@@ -1,0 +1,105 @@
+{% load staticfiles %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+  <link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css'>
+  <link rel="stylesheet" href="{% static 'jtc/css/register.css' %}">
+</head>
+
+<body>
+<div class="animated rotateIn">
+  <div class='wrapper'>
+  <div class='container'>
+    <div class='row'>
+      <div class='col-xs-6 col-sm-6 col-lg-4 col-xs-offset-4 col-sm-offset-4 col-lg-offset-4'>
+        <div class='header text-center'>
+          <h1 style="height:50px; width:290px;">
+            Sign up
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-xs-6 col-sm-6 col-lg-4 col-xs-offset-4 col-sm-offset-4 col-lg-offset-4'>
+        <img src="{% static 'jtc/img/background-shape.png' %}" class='img--abstract'>
+        <div class='form--container'>
+          <div class='row'>
+            <div class='col-xs-12'>
+              {% if a %}
+              <p style="color: red; font-size: 14px;">{{ a }}</p>
+              {% endif %}
+              <form name="register_form" method="post">
+                {% csrf_token %}
+                <label>
+                  {% render_field form.fname %}
+                  <span>First Name</span>
+                </label>
+                <label>
+                  {% render_field form.lname %}
+                  <span>Last Name</span>
+                </label>
+                <label>
+                  {% render_field form.email %}
+                  <span>E-mail</span>
+                </label>
+                <label>
+                  {% render_field form.password %}
+                  <span>Password</span>
+                </label>
+                <label>
+                  <input type="password" id="confirm_password"required type='text'>
+                  <span>Confirm Password</span>
+                </label>
+                 <label>
+                  {% render_field form.captcha %}
+                </label>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-xs-12'>
+              <p>
+                By clicking on Sign up, you agree to
+                <a href="{% url 'terms' %} ">terms & condition
+                and
+                privacy policy</a>
+              </p>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-xs-12'>
+              <input type="submit" class='btn--main' value="Sign Up">
+            </div>
+          </div>
+        </div>
+        <div class='footer--links text-center'>
+          <p>
+            Already have an account?
+            <a href="{% url 'login' %}">Login</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          </form>
+<script>
+  var password = document.getElementById("id_password")
+  , confirm_password = document.getElementById("confirm_password");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+id_password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+</script>
+  
+</body>
+</html>

@@ -1,0 +1,31 @@
+{% extends 'jtc/base.html' %}
+{% load staticfiles %}
+{% block middle %}
+<div class="menu-overlay"></div>
+				<div class="page-full">
+					<div class="trailer-slider">
+						{% for mov in add %}
+						<div class="trailer" style="background-image: url({{ mov.banner }});">
+							<div class="inner">
+								<a href="{{ mov.trailer_link }}" class="video-play"><i class="fa fa-youtube-play"></i></a>
+								<div class="video-details">
+									<h4>{{ mov.title }}</h4>
+									<div class="video-share">Share: <a href=""><i class="fa fa-facebook"></i></a><a href=""><i class="fa fa-twitter"></i></a><a href=""><i class="fa fa-google-plus"></i></a></div>
+								</div>
+							</div> <!-- end .inner -->
+						</div>
+						{% endfor %}
+						{% for mov in movie %}
+						<div class="trailer" style="background-image: url({{ mov.banner }});">
+							<div class="inner">
+								<a href="{{ mov.trailer_link }}" class="video-play"><i class="fa fa-youtube-play"></i></a>
+								<div class="video-details">
+									<h4>{{ mov.title }}</h4>
+									<div class="video-share">Share: <a href=""><i class="fa fa-facebook"></i></a><a href=""><i class="fa fa-twitter"></i></a><a href=""><i class="fa fa-google-plus"></i></a></div>
+								</div>
+							</div> <!-- end .inner -->
+						</div>
+						{% endfor %}<!-- end .trailer -->
+					</div> <!-- end .trailer-slider -->
+				</div> <!-- end .page-full -->
+{% endblock %}

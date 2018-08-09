@@ -1,0 +1,6 @@
+<center><h2>Select time</h2></center>
+{% for time in times %}
+<input type="radio" name="time" value="{{ time }}" {% if forloop.first %}checked{% endif %}>{{ time }} &nbsp;&nbsp;<br>
+{% endfor %}
+
+

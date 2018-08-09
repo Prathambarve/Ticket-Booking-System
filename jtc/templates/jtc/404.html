@@ -1,0 +1,19 @@
+{% extends 'jtc/base.html' %}
+{% load staticfiles %}
+{% block middle %}
+<div class="menu-overlay"></div>
+				<div class="page-middle">
+					<h1><img src="{% static 'jtc/img/404.png' %}" alt="404" class="img-responsive center-block"></h1>
+					<h2>Page Not Found</h2>
+					<h6>Please try one of the following pages</h6>
+					<div class="button-row"><a href="{% url 'home' %}" class="button white">Home Page</a></div>
+				</div> <!-- end .page-middle -->
+{% endblock %}
+
+{% block slideshow %}
+<ul class="cb-slideshow">
+			{% for mov in back %}
+			<li><span style="background-image: url({{ mov.banner }});">{{ mov.title }}</span></li>
+			{% endfor %}
+		</ul>
+{% endblock %}

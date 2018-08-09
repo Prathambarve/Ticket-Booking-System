@@ -1,0 +1,5 @@
+1920*950 == banner  / bg_movie_name.jpg
+480*246 == menu_poster / menu_movie_name.jpg
+
+
+320*985 == image / star_name.jpg

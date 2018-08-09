@@ -1,0 +1,25 @@
+{% extends 'jtc/base.html' %}
+{% load staticfiles %}
+{% block middle %}
+<!-- Image ki size 320x985 -->
+<div class="menu-overlay"></div>
+				<div class="page-full">
+					<div class="cast-slider owl-carousel">
+						{% for star in stars %}
+						<div class="item" style="background-image: url({{ star.image }});">
+							<div class="overlay"></div>
+							<div class="hover">
+								<a href="" class="expand"><i class="fa fa-plus"></i></a>
+								<h4>{{ star.name }}</h4>
+								<span class="title">{{ star.gender }}</span><!-- Actor or Actress -->
+								<div class="scroll">									
+									<p><strong>About</strong>:{{ star.about|truncatechars:120 }} </p>
+									<p>Role In Movie:{% for j in star.roles.all %}{% if forloop.last %}{{ j.name }}{% else %}{{ j.name }},{% endif %}{% endfor %}</p>
+									<p>Upcoming Movies:{% for j in star.upcoming_movies.all %}{% if forloop.last %}{{ j.name }}{% else %}{{ j.name }},{% endif %}{% endfor %}</p>
+								</div> <!-- end .scroll -->
+							</div> <!-- end .hover -->
+						</div> <!-- end .item -->
+						{% endfor %}
+					</div> <!-- end .cast-slider -->
+				</div> <!-- end .page-full -->
+{% endblock %}
